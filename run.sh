@@ -1,3 +1,7 @@
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install mysql-server python3 -y
+
 sudo service mysql start 
 python3 -m venv env
 source env/bin/activate
