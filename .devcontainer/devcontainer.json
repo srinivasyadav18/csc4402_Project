@@ -1,7 +1,0 @@
-{
-  "name": "project_dev_container",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "remoteUser": "vscode"
-}
