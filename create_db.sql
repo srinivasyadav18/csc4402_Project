@@ -6,5 +6,6 @@ INSERT INTO test_table values(0, "test123");
 INSERT INTO test_table values(1, "test1123");
 INSERT INTO test_table values(2, "test1223");
 INSERT INTO test_table values(3, "test1233");
+insert into test_table value(5, "test5");
 
 SELECT * FROM test_table;
