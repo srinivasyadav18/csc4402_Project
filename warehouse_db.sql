@@ -62,3 +62,30 @@ create table order_info (
     foreign key (product_price) references product(product_price),
     foreign key (cust_id) references customer(cust_id)
     );
+
+INSERT INTO user (email, full_name, password)
+VALUES ('aswini8712@gmail.com', 'sai alluru', 'Game@8712'),
+('vishnu1127@gmail.com', 'Alle Vishnu', 'Viki@1127'),
+('srinivas2001@gmail.com', 'srinivas', 'star@2001'),
+('mike0009@gmail.com', 'mike roberts', 'mike@0008'),
+('rocky1234@gmail.com', 'william rock', 'rocky@123'),
+('balaji5678@gmail.com', 'balaji', 'balaji@5678'),
+('wolski678@gmail.com', 'wolski', 'wolski@678'),
+('wilman45@gmail.com', 'wilman kala', 'kala@456');
+
+INSERT INTO product (product_id, product_name, product_price, unit_type)
+VALUES ( 000001, 'Almonds', 18.58, 'LB'),
+(000002, 'Bananas', 3.49, 'LB'),
+(000003, 'Cranberries', 9.99, 'LB'),
+(000004, 'Deli_Chicken', 19.99, 'LB'),
+(000005, 'Eggs', 2.99, 'Units'),
+(000006, 'Figs', 8.88, 'LB'),
+(000007, 'Grapes', 6.99, 'LB'),
+(000008, 'Honey', 12.45, 'Ounce'),
+(000009, 'Ice_Cream', 5.49, 'Ounce'),
+(000010, 'Jack_fruit', 8.99, 'LB'),
+(000011, 'Kiwi', 7.49, 'LB'),
+(000012, 'Lemons', 5.99, 'LB'),
+(000013, 'Mangoes', 10.80, 'LB'),
+(000014, 'Night_lamp', 20.88, 'Units'),
+(000015, 'Oranges', 4.99, 'Units');
