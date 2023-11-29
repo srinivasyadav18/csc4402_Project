@@ -58,14 +58,7 @@ create table order_info (
     );
 
 INSERT INTO user (email, full_name, password)
-VALUES ('aswini8712@gmail.com', 'sai alluru', 'Game@8712'),
-('vishnu1127@gmail.com', 'Alle Vishnu', 'Viki@1127'),
-('srinivas2001@gmail.com', 'srinivas', 'star@2001'),
-('mike0009@gmail.com', 'mike roberts', 'mike@0008'),
-('rocky1234@gmail.com', 'william rock', 'rocky@123'),
-('balaji5678@gmail.com', 'balaji', 'balaji@5678'),
-('wolski678@gmail.com', 'wolski', 'wolski@678'),
-('wilman45@gmail.com', 'wilman kala', 'kala@456');
+VALUES ('test@gmail.com', 'test_user', 'test_password');
 
 INSERT INTO product (product_id, product_name, product_price, unit_type)
 VALUES ( 000001, 'Almonds', 18.58, 'LB'),
@@ -85,13 +78,12 @@ VALUES ( 000001, 'Almonds', 18.58, 'LB'),
 (000015, 'Oranges', 4.99, 'Units');
 
 INSERT INTO warehouse (product_id, product_name, qty_instock)
-VALUES(000003, 'Cranberries', 18),
-(000002, 'Bananas', 100),
-(000015, 'Oranges', 189);
+VALUES(000003, 'Cranberries', 1800),
+(000002, 'Bananas', 10000),
+(000015, 'Oranges', 18900);
 
 INSERT INTO customer(cust_id, cust_name, email, phone, address1)
-VALUES(1, 'sai alluru', 'aswini8712@gmail.com', 1234, 'bluebonnet'),
-(2, 'Alle Vishnu', 'vishnu1127@gmail.com', 4321, 'burbank');
+VALUES(0, 'test_user', 'test@gmail.com', 1234, 'bluebonnet');
 
-insert into order_info(order_id, cust_id, product_id, product_name, product_qty, product_price, total_price);
-values(1, 1, 000001, 'Almonds', 2, 18.58, 50);
+-- insert into order_info(order_id, cust_id, product_id, product_name, product_qty, product_price, total_price);
+-- values(1, 1, 000001, 'Almonds', 2, 18.58, 50);
