@@ -1,9 +1,9 @@
 create database Warehouse_Database;
 create table user (
-    -> email varchar(50) NOT NULL,
-    -> full_name varchar(35) NOT NULL,
-    -> password varchar(15) NOT NULL,
-    -> primary key(email));
+    email varchar(50) NOT NULL,
+    full_name varchar(35) NOT NULL,
+    password varchar(15) NOT NULL,
+    primary key(email));
 
 CREATE TABLE product (
     product_id int(10) NOT NULL, 
@@ -12,22 +12,19 @@ CREATE TABLE product (
     unit_type varchar(10) NOT NULL,
     PRIMARY KEY (product_id));
 
-CREATE TABLE warehouse (
-    warehouse_id int NOT NULL,
-    product_id int,
-    product_name varchar(35),
-    qty_instock int(5) not null,
-    primary key (warehouse_id),
-    foreign key (product_id) references product(product_id),
-    foreign key (product_name) references product(product_name)
-    );
-   
 CREATE INDEX idx_product_id ON product (product_id);
 create index idx_product_name on product (product_name);
 create index idx_product_price on product(product_price);
-
 create index idx_user_name on user(full_name);
-create index idx_user_email on user(email):
+create index idx_user_email on user(email);
+
+CREATE TABLE warehouse (
+    product_id int,
+    product_name varchar(35),
+    qty_instock int(5) not null,
+    foreign key (product_id) references product(product_id),
+    foreign key (product_name) references product(product_name)
+    );
 
 create table customer (
      cust_id int(10) not null, 
@@ -35,16 +32,14 @@ create table customer (
      email varchar(50),
      phone int(11) not null,
      address1 varchar(30) not null,
-     address2 varchar(30), 
-     city varchar(30) not null, 
-     state varchar(30) not null, 
-     country varchar(30) not null,
-     zip_code int(5) not null, 
+    --  address2 varchar(30), 
+    --  city varchar(30) not null, 
+    --  state varchar(30) not null, 
+    --  country varchar(30) not null,
+    --  zip_code int(5) not null, 
      primary key (cust_id), 
-     foreign key (cust_name) 
-     references user(full_name), 
-     foreign key (email) 
-     references user(email) );
+     foreign key (cust_name) references user(full_name), 
+     foreign key (email) references user(email) );
 
 
 create table order_info ( 
@@ -52,9 +47,8 @@ create table order_info (
     cust_id int not null,
     product_id int not null,
     product_name varchar(35) not null,
-    product_qty int(2) not null,
+    product_qty decimal(6,2) not null,
     product_price decimal(6,2),
-    total_num_products int(2) not null,
     total_price decimal(6,2) not null,
     primary key (order_id),
     foreign key (product_id) references product(product_id),
@@ -89,3 +83,15 @@ VALUES ( 000001, 'Almonds', 18.58, 'LB'),
 (000013, 'Mangoes', 10.80, 'LB'),
 (000014, 'Night_lamp', 20.88, 'Units'),
 (000015, 'Oranges', 4.99, 'Units');
+
+INSERT INTO warehouse (product_id, product_name, qty_instock)
+VALUES(000003, 'Cranberries', 18),
+(000002, 'Bananas', 100),
+(000015, 'Oranges', 189);
+
+INSERT INTO customer(cust_id, cust_name, email, phone, address1)
+VALUES(1, 'sai alluru', 'aswini8712@gmail.com', 1234, 'bluebonnet'),
+(2, 'Alle Vishnu', 'vishnu1127@gmail.com', 4321, 'burbank');
+
+insert into order_info(order_id, cust_id, product_id, product_name, product_qty, product_price, total_price);
+values(1, 1, 000001, 'Almonds', 2, 18.58, 50);
