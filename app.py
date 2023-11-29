@@ -101,7 +101,7 @@ def display_warehouse():
 def show_order_from_customer(cust_id):
     cur = conn.cursor()
 
-    cur.execute(f"SELECT product_name, product_qty, total_price FROM order_info WHERE order_info.cust_id={cust_id}")
+    cur.execute(f"SELECT order_id, product_name, product_qty, total_price FROM order_info WHERE order_info.cust_id={cust_id}")
     products = cur.fetchall()
     if len(products) == 0:
         time.sleep(1)
@@ -110,12 +110,12 @@ def show_order_from_customer(cust_id):
     time.sleep(1)
 
     print("\nYour orders : \n")
-    print("===============================================")
-    print(f'{"Product Name":^16} {"Qty ":^16} {"Price":^16}')
-    print("===============================================")
-    for pname, qty, price in products:
-        print(f'{pname:^16} {qty:^16} {price:^16}')
-    print("===============================================")
+    print("======================================================================")
+    print(f'{"Order ID":^16} {"Product Name":^16} {"Qty ":^16} {"Price":^16}')
+    print("======================================================================")
+    for oid, pname, qty, price in products:
+        print(f'{oid:^16} {pname:^16} {qty:^16} {price:^16}')
+    print("======================================================================")
 
 
 def take_order_from_customer(cust_id):
@@ -163,7 +163,12 @@ def take_order_from_customer(cust_id):
             break
         else:
             print(f"\n\n!!! {pname} product not found in warehouse. Please enter correct product name.\n")
-    
+
+def cancel_order_from_customer(cust_id):
+    show_order_from_customer(cust_id)
+    oid = input("\n\nEnter order id to cancel : ")
+    print(f"Cancelling order : {oid}")
+
 def main():
     sleep_helper()
     print("****************************************************************************")
@@ -181,20 +186,23 @@ def main():
         sleep_helper()
         print("\n\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         print(f'{"# Use one of the following commands to interact #":^61} \n')
-        print(f'> display: Displays all the products available in warehouse')
+        print(f'> warehouse: Displays all the products available in warehouse')
         print(f'> order: To order a product from warehouse')
-        print(f'> show: To list out all your previous orders')
+        print(f'> list: To list out all your previous orders')
+        print(f'> cancel: To list out all your previous orders')
         print(f'> exit: To exit from the program')
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         print()
         sleep_helper()
         ord_str = input("Enter command : ")
-        if ord_str == "display":
+        if ord_str == "warehouse":
             display_warehouse()
         elif ord_str == "order":
             take_order_from_customer(cid)
-        elif ord_str == "show":
+        elif ord_str == "list":
             show_order_from_customer(cid)
+        elif ord_str == "cancel":
+            cancel_order_from_customer(cid)
         elif ord_str == "exit":
             break
         else: 
