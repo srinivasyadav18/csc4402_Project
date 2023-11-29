@@ -50,7 +50,7 @@ def signup():
     insert_user_query = f'INSERT INTO user VALUES("{email}", "{cust_name}", "{password}");'
     cur.execute(insert_user_query)
 
-    insert_customer_query = f'INSERT INTO customer VALUES({cust_id},"{cust_name}", "{email}", {phone}, "{address1}");'
+    insert_customer_query = f'INSERT INTO customer VALUES({cust_id},"{cust_name}", "{email}", "{phone}", "{address1}");'
     cur.execute(insert_customer_query)
 
     conn.commit()
@@ -180,7 +180,7 @@ def main():
     while(True):
         sleep_helper()
         print("\n\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        print(f'{"# Use on of the following commands to interact #":^61} \n')
+        print(f'{"# Use one of the following commands to interact #":^61} \n')
         print(f'> display: Displays all the products available in warehouse')
         print(f'> order: To order a product from warehouse')
         print(f'> show: To list out all your previous orders')
