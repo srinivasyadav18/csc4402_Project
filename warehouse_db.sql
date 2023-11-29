@@ -1,4 +1,6 @@
 create database Warehouse_Database;
+use Warehouse_Database;
+
 create table user (
     email varchar(50) NOT NULL,
     full_name varchar(35) NOT NULL,
@@ -21,10 +23,10 @@ create index idx_user_email on user(email);
 CREATE TABLE warehouse (
     product_id int,
     product_name varchar(35),
-    qty_instock int(5) not null,
+    qty_instock decimal(6,2) not null,
     foreign key (product_id) references product(product_id),
     foreign key (product_name) references product(product_name)
-    );
+);
 
 create table customer (
      cust_id int(10) not null, 
@@ -39,7 +41,8 @@ create table customer (
     --  zip_code int(5) not null, 
      primary key (cust_id), 
      foreign key (cust_name) references user(full_name), 
-     foreign key (email) references user(email) );
+     foreign key (email) references user(email) 
+);
 
 
 create table order_info ( 
@@ -55,7 +58,7 @@ create table order_info (
     foreign key (product_name) references product(product_name),
     foreign key (product_price) references product(product_price),
     foreign key (cust_id) references customer(cust_id)
-    );
+);
 
 INSERT INTO user (email, full_name, password)
 VALUES ('test@gmail.com', 'test_user', 'test_password');
@@ -79,11 +82,15 @@ VALUES ( 000001, 'Almonds', 18.58, 'LB'),
 
 INSERT INTO warehouse (product_id, product_name, qty_instock)
 VALUES(000003, 'Cranberries', 1800),
-(000002, 'Bananas', 10000),
-(000015, 'Oranges', 18900);
+(000002, 'Bananas', 1000),
+(000011, 'Kiwi', 500),
+(000012, 'Lemons', 1245),
+(000013, 'Mangoes', 5421),
+(000014, 'Night_lamp', 1204),
+(000015, 'Oranges', 1800);
 
 INSERT INTO customer(cust_id, cust_name, email, phone, address1)
-VALUES(0, 'test_user', 'test@gmail.com', 1234, 'bluebonnet');
+VALUES(0, 'test_user', 'test@gmail.com', 1234, 'test_address');
 
 -- insert into order_info(order_id, cust_id, product_id, product_name, product_qty, product_price, total_price);
 -- values(1, 1, 000001, 'Almonds', 2, 18.58, 50);

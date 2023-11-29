@@ -39,8 +39,13 @@ def signup():
 
         # print(cust_name, email, password, address1)
     cur.execute(f'SELECT MAX(cust_id) FROM customer')
-    cust_id = int(cur.fetchone()[0]) + 1
-    print("cust_id new id : ", cust_id)
+
+    cf = cur.fetchone()[0]
+    if cf is None:
+        cust_id = 0
+    else:
+        cust_id = int(cf) + 1
+    # print("cust_id new id : ", cust_id)
 
     insert_user_query = f'INSERT INTO user VALUES("{email}", "{cust_name}", "{password}");'
     cur.execute(insert_user_query)
@@ -115,6 +120,7 @@ def show_order_from_customer(cust_id):
 
 def take_order_from_customer(cust_id):
     print("\n\n--> Please select an item to order.")
+    display_warehouse();
 
     while (True):
         pname = input("Enter the product name to order : ")
@@ -138,20 +144,25 @@ def take_order_from_customer(cust_id):
             yn = input("Enter yes or no : ")
             if yn == "yes":
                 cur.execute(f'SELECT MAX(order_id) FROM order_info')
-                order_id = int(cur.fetchone()[0]) + 1
-                print("Order max id : ", order_id)
+                cf = cur.fetchone()[0]
+                if cf == None:
+                    order_id = 0
+                else:
+                    order_id = int(cf) + 1
+                # print("Order max id : ", order_id)
                 insert_order = f'INSERT INTO order_info values({order_id}, {cust_id}, {pid}, "{pname}", {qty}, {pprice}, {total_price});'
                 cur.execute(insert_order)
                 conn.commit()
 
-                print(insert_order)
+                # print(insert_order)
 
                 print("\n--> Order placed succesfully! Thank you")
+                show_order_from_customer(cust_id)
             else:
                 print("\n--> Thank you for not ordering")
             break
         else:
-            print(f"\n\n!!! {bs} product not found in warehouse. Please enter correct product name.\n")
+            print(f"\n\n!!! {pname} product not found in warehouse. Please enter correct product name.\n")
     
 def main():
     sleep_helper()
@@ -167,13 +178,25 @@ def main():
     sleep_helper()
 
     while(True):
-        ord_str = input("Enter display or order or show : ")
+        sleep_helper()
+        print("\n\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        print(f'{"# Use on of the following commands to interact #":^61} \n')
+        print(f'> display: Displays all the products available in warehouse')
+        print(f'> order: To order a product from warehouse')
+        print(f'> show: To list out all your previous orders')
+        print(f'> exit: To exit from the program')
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        print()
+        sleep_helper()
+        ord_str = input("Enter command : ")
         if ord_str == "display":
             display_warehouse()
         elif ord_str == "order":
             take_order_from_customer(cid)
         elif ord_str == "show":
             show_order_from_customer(cid)
+        elif ord_str == "exit":
+            break
         else: 
             print("\n input error ")
     conn.close()
