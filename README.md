@@ -1,5 +1,8 @@
-# csc4402_Project
-Database Application
+# csc4402 Project 
+
+## Online Ordering and Warehouse Database Management System
+
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/srinivasyadav18/csc4402_Project?quickstart=1&devcontainer_path=.devcontainer%2Fdevcontainer.json)
 
 ### Steps to run the code
