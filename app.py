@@ -106,7 +106,7 @@ def show_order_from_customer(cust_id):
     if len(products) == 0:
         time.sleep(1)
         print("\n\nYou do not have any orders yet! Please order")
-        return
+        return False
     time.sleep(1)
 
     print("\nYour orders : \n")
@@ -116,7 +116,7 @@ def show_order_from_customer(cust_id):
     for oid, pname, qty, price in products:
         print(f'{oid:^16} {pname:^16} {qty:^16} {price:^16}')
     print("======================================================================")
-
+    return True
 
 def take_order_from_customer(cust_id):
     print("\n\n--> Please select an item to order.")
@@ -165,9 +165,22 @@ def take_order_from_customer(cust_id):
             print(f"\n\n!!! {pname} product not found in warehouse. Please enter correct product name.\n")
 
 def cancel_order_from_customer(cust_id):
-    show_order_from_customer(cust_id)
-    oid = input("\n\nEnter order id to cancel : ")
-    print(f"Cancelling order : {oid}")
+    prev_order = show_order_from_customer(cust_id)
+    if prev_order:
+        while True:
+            oid = input("\n\nEnter order id to cancel : ")
+            cur = conn.cursor()
+            cur.execute(f"SELECT order_id FROM order_info WHERE order_id={oid} AND cust_id={cust_id}")
+            ores = cur.fetchone()
+            if ores is None:
+                print(f"\n!!!Order with order id : {ores} is not found")
+                print("Please try again")
+            else:
+                cur.execute(f"DELETE FROM order_info WHERE order_id={oid}")
+                conn.commit()
+                print(f"order {oid} has been cancelled successfull\n")
+                
+                break
 
 def main():
     sleep_helper()
@@ -189,7 +202,7 @@ def main():
         print(f'> warehouse: Displays all the products available in warehouse')
         print(f'> order: To order a product from warehouse')
         print(f'> list: To list out all your previous orders')
-        print(f'> cancel: To list out all your previous orders')
+        print(f'> cancel: To cancel previous order')
         print(f'> exit: To exit from the program')
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         print()
