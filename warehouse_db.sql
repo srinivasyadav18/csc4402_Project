@@ -33,17 +33,11 @@ create table customer (
      cust_name varchar(35), 
      email varchar(50),
      phone varchar(15) not null,
-     address1 varchar(100) not null,
-    --  address2 varchar(30), 
-    --  city varchar(30) not null, 
-    --  state varchar(30) not null, 
-    --  country varchar(30) not null,
-    --  zip_code int(5) not null, 
+     address1 varchar(100) not null, 
      primary key (cust_id), 
      foreign key (cust_name) references user(full_name), 
      foreign key (email) references user(email) 
 );
-
 
 create table order_info ( 
     order_id int(10) not null,
@@ -60,37 +54,3 @@ create table order_info (
     foreign key (cust_id) references customer(cust_id)
 );
 
-INSERT INTO user (email, full_name, password)
-VALUES ('test@gmail.com', 'test_user', 'test_password');
-
-INSERT INTO product (product_id, product_name, product_price, unit_type)
-VALUES ( 000001, 'Almonds', 18.58, 'LB'),
-(000002, 'Bananas', 3.49, 'LB'),
-(000003, 'Cranberries', 9.99, 'LB'),
-(000004, 'Deli_Chicken', 19.99, 'LB'),
-(000005, 'Eggs', 2.99, 'Units'),
-(000006, 'Figs', 8.88, 'LB'),
-(000007, 'Grapes', 6.99, 'LB'),
-(000008, 'Honey', 12.45, 'Ounce'),
-(000009, 'Ice_Cream', 5.49, 'Ounce'),
-(000010, 'Jack_fruit', 8.99, 'LB'),
-(000011, 'Kiwi', 7.49, 'LB'),
-(000012, 'Lemons', 5.99, 'LB'),
-(000013, 'Mangoes', 10.80, 'LB'),
-(000014, 'Night_lamp', 20.88, 'Units'),
-(000015, 'Oranges', 4.99, 'Units');
-
-INSERT INTO warehouse (product_id, product_name, qty_instock)
-VALUES(000003, 'Cranberries', 1800),
-(000002, 'Bananas', 1000),
-(000011, 'Kiwi', 500),
-(000012, 'Lemons', 1245),
-(000013, 'Mangoes', 5421),
-(000014, 'Night_lamp', 1204),
-(000015, 'Oranges', 1800);
-
-INSERT INTO customer(cust_id, cust_name, email, phone, address1)
-VALUES(0, 'test_user', 'test@gmail.com', 1234, 'test_address');
-
--- insert into order_info(order_id, cust_id, product_id, product_name, product_qty, product_price, total_price);
--- values(1, 1, 000001, 'Almonds', 2, 18.58, 50);
