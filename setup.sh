@@ -15,3 +15,4 @@ sudo mysql < create_admin.sql
 
 # create warehouse database and load dummy data
 sudo mysql < warehouse_db.sql
+sudo mysql < data.sql
