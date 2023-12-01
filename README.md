@@ -16,10 +16,10 @@
 - The default email and password for the CLI application is : `email= user@gmail.com  & password= password`
 - `mysql` command should always be run as `sudo`.
 - The tests are in `test.sql` file. To run all the tests perform this commad : `sudo mysql < test.sql` 
-- To test manually, Open mysql by running command `sudo mysql` and copy paste each query from test.sql.
+- To test manually, Open mysql by running command `sudo mysql` and copy paste each query from `test.sql`.
+- **NOTE** If something goes wrong and if you want to restart everything, try running this command `source restart.sh` OR restart whole code-space instance again.
 
-
-### Code Content:
+## Code Content:
 - **Database relations with constraints (2 points). You must submit the database file(s) based on the chosen platform. You can use any relational database management system to create your database. We highly recommend either SQLite or MySQ**L.
 
 The Database schema resides in `warehouse_db.sql` file.
